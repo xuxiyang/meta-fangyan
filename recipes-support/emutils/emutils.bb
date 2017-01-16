@@ -6,7 +6,7 @@ PR = "r0"
 PV = "1.1"
 SRCBRANCH = "master"
 SRCREV = "644c216d454a589e88cc21e0097d55ac5f07563f"
-SRC_URI = "ssh://git@192.168.3.200:10022/utils/utils.git;branch=${SRCBRANCH};protocol=ssh"
+SRC_URI = "git://git@192.168.3.200:10022/utils/utils.git;branch=${SRCBRANCH};protocol=ssh"
 
 S = "${WORKDIR}/git"
 
