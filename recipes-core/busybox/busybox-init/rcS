@@ -1,0 +1,29 @@
+#!/bin/sh
+
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+prevlevel=N
+umask 022
+export PATH runlevel prevlevel
+
+#
+#	Trap CTRL-C &c only in this shell so we can interrupt subprocesses.
+#
+trap ":" INT QUIT TSTP
+
+#
+#	Call all parts in order.
+#
+# Start all init scripts in /etc/init.d
+#
+for i in /etc/rc5.d/S??* ;do
+     case "$i" in
+        *.sh)
+            # Source shell script for speed.
+			. $i
+            ;;
+        *)
+            # No sh extension, so fork subprocess.
+            $i start
+            ;;
+    esac
+done

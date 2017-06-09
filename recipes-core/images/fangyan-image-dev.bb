@@ -22,7 +22,7 @@ IMAGE_INSTALL += " \
 IMAGE_INSTALL += "libasan libubsan"
 
 IMAGE_INSTALL += "packagegroup-qt5-qtcreator-debug gdb"
-IMAGE_INSTALL += "mtd-utils mtd-utils-ubifs util-linux"
+IMAGE_INSTALL += "mtd-utils mtd-utils-ubifs"
 #IMAGE_INSTALL += "glitem-qmlplugins imageitem-qmlplugins"
 
 IMAGE_INSTALL += "iperf mpfr i2c-tools ncurses catprogress bonnie++"
