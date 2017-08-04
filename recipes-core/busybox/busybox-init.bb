@@ -6,6 +6,10 @@ SRC_URI = "file://inittab \
 		   file://rcS \
 		   file://presysteminit.sh \
 		   file://systeminit.sh \
+		   file://udisk.sh \
+		   file://mmc.sh \
+		   file://mdev.conf \
+		   file://modules.sh \
 		   "
 
 S = "${WORKDIR}"
@@ -17,8 +21,12 @@ do_compile() {
 do_install() {
 	install -d ${D}${sysconfdir}
     install -d ${D}${sysconfdir}/init.d/
+    install -d ${D}${sysconfdir}/mdev/
 
     install -m 0644 ${WORKDIR}/inittab ${D}${sysconfdir}/inittab
+    install -m 0644 ${WORKDIR}/mdev.conf ${D}${sysconfdir}/
+    install -m 0755 ${WORKDIR}/udisk.sh ${D}${sysconfdir}/mdev/
+    install -m 0755 ${WORKDIR}/mmc.sh ${D}${sysconfdir}/mdev/
 
     set -x
     tmp="${SERIAL_CONSOLES}"
@@ -36,10 +44,12 @@ do_install() {
 
     install -m 755 ${WORKDIR}/presysteminit.sh ${D}${sysconfdir}/init.d/asysteminit.sh
     install -m 755 ${WORKDIR}/systeminit.sh ${D}${sysconfdir}/init.d/
+    install -m 755 ${WORKDIR}/modules.sh ${D}${sysconfdir}/init.d/
     install -m 755 ${WORKDIR}/rcS ${D}${sysconfdir}/init.d/
 
 	update-rc.d -r ${D} asysteminit.sh start 00 5 . stop 00 6 .
 	update-rc.d -r ${D} systeminit.sh start 00 5 . stop 00 6 .
+	update-rc.d -r ${D} modules.sh start 99 5 . stop 99 6 .
 }
 
 FILES_${PN} += "${sysconfdir}/inittab ${sysconfdir}/init.d/rcS"
