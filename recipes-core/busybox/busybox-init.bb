@@ -10,6 +10,8 @@ SRC_URI = "file://inittab \
 		   file://mmc.sh \
 		   file://mdev.conf \
 		   file://modules.sh \
+		   file://FzLt.TTF \
+		   file://msyh.ttf \
 		   "
 
 S = "${WORKDIR}"
@@ -22,11 +24,15 @@ do_install() {
 	install -d ${D}${sysconfdir}
     install -d ${D}${sysconfdir}/init.d/
     install -d ${D}${sysconfdir}/mdev/
+    install -d ${D}/usr/lib/fonts/
 
     install -m 0644 ${WORKDIR}/inittab ${D}${sysconfdir}/inittab
     install -m 0644 ${WORKDIR}/mdev.conf ${D}${sysconfdir}/
     install -m 0755 ${WORKDIR}/udisk.sh ${D}${sysconfdir}/mdev/
     install -m 0755 ${WORKDIR}/mmc.sh ${D}${sysconfdir}/mdev/
+    install -m 0755 ${WORKDIR}/mmc.sh ${D}${sysconfdir}/mdev/
+    install -m 0755 ${WORKDIR}/msyh.ttf ${D}/usr/lib/fonts/
+    install -m 0755 ${WORKDIR}/FzLt.TTF ${D}/usr/lib/fonts/
 
     set -x
     tmp="${SERIAL_CONSOLES}"
@@ -52,4 +58,4 @@ do_install() {
 	update-rc.d -r ${D} modules.sh start 99 5 . stop 99 6 .
 }
 
-FILES_${PN} += "${sysconfdir}/inittab ${sysconfdir}/init.d/rcS"
+FILES_${PN} += "${sysconfdir}/inittab ${sysconfdir}/init.d/rcS /usr/lib/fonts"
