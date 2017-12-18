@@ -12,6 +12,9 @@ SRC_URI = "file://inittab \
 		   file://modules.sh \
 		   file://FzLt.TTF \
 		   file://msyh.ttf \
+		   file://FZLanTingHei.ttf \
+		   file://app.ini \
+		   file://startapp.sh \
 		   "
 
 S = "${WORKDIR}"
@@ -26,6 +29,8 @@ do_install() {
     install -d ${D}${sysconfdir}/mdev/
     install -d ${D}/usr/lib/fonts/
 
+    install -m 755 ${WORKDIR}/app.ini ${D}${sysconfdir}/
+
     install -m 0644 ${WORKDIR}/inittab ${D}${sysconfdir}/inittab
     install -m 0644 ${WORKDIR}/mdev.conf ${D}${sysconfdir}/
     install -m 0755 ${WORKDIR}/udisk.sh ${D}${sysconfdir}/mdev/
@@ -33,6 +38,7 @@ do_install() {
     install -m 0755 ${WORKDIR}/mmc.sh ${D}${sysconfdir}/mdev/
     install -m 0755 ${WORKDIR}/msyh.ttf ${D}/usr/lib/fonts/
     install -m 0755 ${WORKDIR}/FzLt.TTF ${D}/usr/lib/fonts/
+    install -m 0755 ${WORKDIR}/FZLanTingHei.ttf ${D}/usr/lib/fonts/
 
     set -x
     tmp="${SERIAL_CONSOLES}"
@@ -51,10 +57,12 @@ do_install() {
     install -m 755 ${WORKDIR}/presysteminit.sh ${D}${sysconfdir}/init.d/asysteminit.sh
     install -m 755 ${WORKDIR}/systeminit.sh ${D}${sysconfdir}/init.d/
     install -m 755 ${WORKDIR}/modules.sh ${D}${sysconfdir}/init.d/
+    install -m 755 ${WORKDIR}/startapp.sh ${D}${sysconfdir}/init.d/
     install -m 755 ${WORKDIR}/rcS ${D}${sysconfdir}/init.d/
 
 	update-rc.d -r ${D} asysteminit.sh start 00 5 . stop 00 6 .
 	update-rc.d -r ${D} systeminit.sh start 00 5 . stop 00 6 .
+	update-rc.d -r ${D} startapp.sh start 00 5 . stop 00 6 .
 	update-rc.d -r ${D} modules.sh start 99 5 . stop 99 6 .
 }
 
