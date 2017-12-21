@@ -1,8 +1,8 @@
 #!/bin/sh
 ### BEGIN INIT INFO
 # Provides:          module-init-tools
-# Required-Start:    
-# Required-Stop:     
+# Required-Start:
+# Required-Stop:
 # Should-Start:      checkroot
 # Should-stop:
 # Default-Start:     S
@@ -48,5 +48,3 @@ for f in /etc/modules-load.d/*.conf; do
 	process_file $f
 done
 [ "$VERBOSE" != no ] && echo
-
-exit 0
