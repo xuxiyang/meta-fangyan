@@ -15,6 +15,7 @@ SRC_URI = "file://inittab \
 		   file://FZLanTingHei.ttf \
 		   file://app.ini \
 		   file://startapp.sh \
+		   file://startup.raw \
 		   "
 
 S = "${WORKDIR}"
@@ -35,10 +36,10 @@ do_install() {
     install -m 0644 ${WORKDIR}/mdev.conf ${D}${sysconfdir}/
     install -m 0755 ${WORKDIR}/udisk.sh ${D}${sysconfdir}/mdev/
     install -m 0755 ${WORKDIR}/mmc.sh ${D}${sysconfdir}/mdev/
-    install -m 0755 ${WORKDIR}/mmc.sh ${D}${sysconfdir}/mdev/
     install -m 0755 ${WORKDIR}/msyh.ttf ${D}/usr/lib/fonts/
     install -m 0755 ${WORKDIR}/FzLt.TTF ${D}/usr/lib/fonts/
-    install -m 0755 ${WORKDIR}/FZLanTingHei.ttf ${D}/usr/lib/fonts/
+	install -m 0755 ${WORKDIR}/FZLanTingHei.ttf ${D}/usr/lib/fonts/
+    install -m 0755 ${WORKDIR}/startup.raw ${D}/home/root/
 
     set -x
     tmp="${SERIAL_CONSOLES}"
