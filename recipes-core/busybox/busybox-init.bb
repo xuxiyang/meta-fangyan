@@ -29,6 +29,7 @@ do_install() {
     install -d ${D}${sysconfdir}/init.d/
     install -d ${D}${sysconfdir}/mdev/
     install -d ${D}/usr/lib/fonts/
+	install -d ${D}/home/root
 
     install -m 755 ${WORKDIR}/app.ini ${D}${sysconfdir}/
 
@@ -67,4 +68,4 @@ do_install() {
 	update-rc.d -r ${D} modules.sh start 99 5 . stop 99 6 .
 }
 
-FILES_${PN} += "${sysconfdir}/inittab ${sysconfdir}/init.d/rcS /usr/lib/fonts"
+FILES_${PN} += "${sysconfdir}/inittab ${sysconfdir}/init.d/rcS /usr/lib/fonts /home/root"
