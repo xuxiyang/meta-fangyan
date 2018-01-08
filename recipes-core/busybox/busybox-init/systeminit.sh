@@ -23,3 +23,9 @@ ifconfig lo up
 echo "Starting mdev ..."
 echo /sbin/mdev > /proc/sys/kernel/hotplug
 mdev -s
+
+echo "open cpu1"
+echo 1 > /sys/bus/cpu/devices/cpu1/online
+
+# echo "resize /dev/mmcblk2p3"
+resize2fs /dev/mmcblk2p3 > /dev/null 2>&1
